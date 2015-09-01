@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;PAPER_WIDTH&quot;:1440,&quot;PAPER_HEIGHT&quot;:900,&quot;PAPER_SCROLL_LEFT&quot;:2082,&quot;PAPER_SCROLL_TOP&quot;:2083,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;valo&quot;}">
+ </head> 
+ <body> 
+  <v-vertical-layout primary-style-name="v-verticallayout" spacing="true" size-auto="true" margin="true"> 
+   <v-horizontal-layout primary-style-name="v-horizontallayout" spacing="true"> 
+    <v-label size-auto="true" plain-text="">
+      Status 
+    </v-label> 
+    <v-label style-name="colored bold" size-auto="true" plain-text="" _id="statusLabel">
+      Normal connection 
+    </v-label> 
+   </v-horizontal-layout> 
+   <v-horizontal-layout primary-style-name="v-horizontallayout" spacing="true"> 
+    <v-panel caption="Configuration" size-auto="true"> 
+     <v-vertical-layout primary-style-name="v-verticallayout" spacing="true" size-auto="true" margin="true"> 
+      <v-grid-layout spacing="true"> 
+       <row> 
+        <column> 
+         <v-label description="The time to wait between trying to re-establish the connection to the server" size-auto="true" plain-text="">
+           Interval between reconnect attempts (ms) 
+         </v-label> 
+        </column> 
+        <column> 
+         <v-text-field width="5em" _id="reconnectInterval"></v-text-field> 
+        </column> 
+       </row> 
+       <row> 
+        <column> 
+         <v-label description="The time between noticing a problem with the connection and showing the reconnect dialog" size-auto="true" plain-text="">
+           Timeout before showing dialog (ms) 
+         </v-label> 
+        </column> 
+        <column> 
+         <v-text-field width="5em" _id="timeoutBeforeShowingDialog"></v-text-field> 
+        </column> 
+       </row> 
+       <row> 
+        <column> 
+         <v-check-box caption="Allow interaction while reconnecting" description="If off, the reconnect dialog prevents any input to the application. If on, the application can be used as normally except all actions are queued until the connection has been re-established." _id="allowInteractionWhileReconnecting"></v-check-box> 
+        </column> 
+       </row> 
+      </v-grid-layout> 
+     </v-vertical-layout> 
+    </v-panel> 
+    <v-panel caption="Simulations" size-auto="true"> 
+     <v-vertical-layout primary-style-name="v-verticallayout" spacing="true" size-auto="true" margin="true"> 
+      <v-button width-full="true" plain-text="" _id="simulateLongDisconnect">
+        Simulate 10s network disconnect 
+      </v-button> 
+      <v-button plain-text="" _id="simulateBadConnection">
+        Simulate 200ms on, 800ms off for 15s 
+      </v-button> 
+     </v-vertical-layout> 
+    </v-panel> 
+   </v-horizontal-layout> 
+   <v-panel caption="Application" _id="application"> 
+    <v-vertical-layout primary-style-name="v-verticallayout" size-auto="true" margin="true" _id="logLayout"> 
+     <v-button plain-text="" _id="sayHelloToTheServer">
+       Say hello to the server 
+     </v-button> 
+    </v-vertical-layout> 
+   </v-panel> 
+  </v-vertical-layout>  
+ </body>
+</html>
