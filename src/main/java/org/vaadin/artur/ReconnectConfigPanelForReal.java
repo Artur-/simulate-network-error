@@ -1,6 +1,13 @@
 package org.vaadin.artur;
 
+import java.text.DateFormat;
+import java.util.Date;
+
+import com.vaadin.data.validator.EmailValidator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 
 public class ReconnectConfigPanelForReal extends ReconnectConfigPanel {
     private int labelCount = 0;
@@ -35,19 +42,19 @@ public class ReconnectConfigPanelForReal extends ReconnectConfigPanel {
             getUI().getReconnectDialogConfiguration().setDialogModal(
                     !allowInteractionWhileReconnecting.getValue());
         });
-        // simulateShortDisconnect.addClickListener(e -> {
-        // statusLabel.setValue("Simulating 1s disconnect");
-        // getUI().setPollInterval(1200);
-        // statusLabel.setStyleName("red");
-        // getUI().errorCodeResponder.enableError(1000, () -> {
-        // resetToDefaultState();
-        // });
-        // });
-        simulateLongDisconnect.addClickListener(e -> {
+        simulateShortDisconnect.addClickListener(e -> {
             statusLabel.setValue("Simulating 10s disconnect");
             statusLabel.setStyleName("red");
-            getUI().setPollInterval(5200);
-            getUI().errorCodeResponder.enableError(5000, () -> {
+            getUI().setPollInterval(10200);
+            getUI().errorCodeResponder.enableError(10000, () -> {
+                resetToDefaultState();
+            });
+        });
+        simulateLongDisconnect.addClickListener(e -> {
+            statusLabel.setValue("Simulating 30s disconnect");
+            statusLabel.setStyleName("red");
+            getUI().setPollInterval(30200);
+            getUI().errorCodeResponder.enableError(30000, () -> {
                 resetToDefaultState();
             });
         });
@@ -60,10 +67,43 @@ public class ReconnectConfigPanelForReal extends ReconnectConfigPanel {
                     });
         });
 
+        /* Hello world app */
         sayHelloToTheServer.addClickListener(e -> {
             logLayout.addComponent(new Label(++labelCount
                     + ". Server says hello!"));
         });
+
+        /* Email app */
+        toField.addValidator(new EmailValidator(
+                "Must be a valid e-mail address"));
+        ccField.addValidator(new EmailValidator(
+                "Must be a valid e-mail address"));
+        subjectField.addValidator(new StringLengthValidator(
+                "Must be at least 3 characters", 3, null, false));
+
+        sendButton.addClickListener(e -> {
+            if (!toField.isValid() || !ccField.isValid()
+                    || !subjectField.isValid() || !messageField.isValid()) {
+                Notification.show("Please fix your input before sending",
+                        Type.ERROR_MESSAGE);
+                return;
+            }
+            String email = "To: " + toField.getValue() + "\n";
+            email += "Cc: " + ccField.getValue() + "\n";
+            email += "Subject: " + subjectField.getValue() + "\n";
+            email += "Message: " + messageField.getValue() + "\n";
+            email += "\n";
+            email += "Sent at "
+                    + DateFormat.getDateTimeInstance(DateFormat.SHORT,
+                            DateFormat.SHORT, getLocale()).format(new Date());
+
+            toField.clear();
+            ccField.clear();
+            subjectField.clear();
+            messageField.clear();
+            Notification.show(email, Type.TRAY_NOTIFICATION);
+        });
+
     }
 
     private void resetToDefaultState() {

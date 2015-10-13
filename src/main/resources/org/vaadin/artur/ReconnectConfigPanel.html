@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;PAPER_WIDTH&quot;:1440,&quot;PAPER_HEIGHT&quot;:900,&quot;PAPER_SCROLL_LEFT&quot;:2082,&quot;PAPER_SCROLL_TOP&quot;:2083,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;valo&quot;}">
+  <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;PAPER_WIDTH&quot;:1440,&quot;PAPER_HEIGHT&quot;:900,&quot;PAPER_SCROLL_LEFT&quot;:1904,&quot;PAPER_SCROLL_TOP&quot;:2063,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
  </head> 
  <body> 
   <v-vertical-layout primary-style-name="v-verticallayout" spacing="true" size-auto="true" margin="true"> 
@@ -47,8 +47,11 @@
     </v-panel> 
     <v-panel caption="Simulations" size-auto="true"> 
      <v-vertical-layout primary-style-name="v-verticallayout" spacing="true" size-auto="true" margin="true"> 
-      <v-button width-full="true" plain-text="" _id="simulateLongDisconnect">
+      <v-button width-full="true" plain-text="" _id="simulateShortDisconnect">
         Simulate 10s network disconnect 
+      </v-button> 
+      <v-button width-full="true" plain-text="" _id="simulateLongDisconnect">
+        Simulate 30s network disconnect 
       </v-button> 
       <v-button plain-text="" _id="simulateBadConnection">
         Simulate 200ms on, 800ms off for 15s 
@@ -56,13 +59,30 @@
      </v-vertical-layout> 
     </v-panel> 
    </v-horizontal-layout> 
-   <v-panel caption="Application" _id="application"> 
-    <v-vertical-layout primary-style-name="v-verticallayout" size-auto="true" margin="true" _id="logLayout"> 
-     <v-button plain-text="" _id="sayHelloToTheServer">
-       Say hello to the server 
-     </v-button> 
-    </v-vertical-layout> 
-   </v-panel> 
+   <v-horizontal-layout primary-style-name="v-horizontallayout" spacing="true"> 
+    <v-panel caption="Test &quot;Hello world&quot; application" _id="application"> 
+     <v-vertical-layout primary-style-name="v-verticallayout" size-auto="true" margin="true" _id="logLayout"> 
+      <v-button plain-text="" _id="sayHelloToTheServer">
+        Say hello to the server 
+      </v-button> 
+     </v-vertical-layout> 
+    </v-panel> 
+    <v-panel caption="Test &quot;E-mail&quot; application" size-auto="true" _id="application2"> 
+     <v-vertical-layout primary-style-name="v-verticallayout" size-auto="true"> 
+      <v-form-layout width="385px" margin="true" _id="to"> 
+       <v-text-field caption="To:" width-full="true" _id="toField"></v-text-field> 
+       <v-text-field caption="Cc:" width-full="true" _id="ccField"></v-text-field> 
+       <v-text-field caption="Subject:" width-full="true" _id="subjectField"></v-text-field> 
+       <v-text-area caption="Message:" width-full="true" _id="messageField"></v-text-area> 
+       <v-horizontal-layout primary-style-name="v-horizontallayout" width-full="true" :bottom="" :right=""> 
+        <v-button plain-text="" _id="sendButton" :bottom="" :right="">
+          Send 
+        </v-button> 
+       </v-horizontal-layout> 
+      </v-form-layout> 
+     </v-vertical-layout> 
+    </v-panel> 
+   </v-horizontal-layout> 
   </v-vertical-layout>  
  </body>
 </html>
